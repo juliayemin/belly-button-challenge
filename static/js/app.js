@@ -1,11 +1,9 @@
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
 function init() {
-  // Fetch the JSON data
   d3.json(url).then(data => {
       var names = data.names;
 
-      // Populate dropdown with sample IDs
       var dropdownMenu = d3.select("#selDataset");
       names.forEach((sample) => {
           dropdownMenu.append("option")
@@ -13,7 +11,6 @@ function init() {
                       .property("value", sample);
       });
 
-      // Use the first sample from the list to build the initial plots
       var firstSample = names[0];
       updateCharts(firstSample);
       updateMetadata(firstSample);
@@ -32,7 +29,7 @@ function updateCharts(sample) {
       var otu_labels = result.otu_labels;
       var sample_values = result.sample_values;
 
-      // Build a Bar Chart using the sample data
+      // Bar Chart
       var yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
       var barData = [{
           y: yticks,
@@ -61,7 +58,7 @@ function updateBubbleChart(sample) {
       var otu_labels = result.otu_labels;
       var sample_values = result.sample_values;
 
-      // Build a Bubble Chart
+      // A Bubble Chart
       var bubbleLayout = {
           title: "Bacteria Cultures Per Sample",
           margin: { t: 0 },
